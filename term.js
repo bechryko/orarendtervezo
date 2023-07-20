@@ -86,12 +86,12 @@ class Term {
     }
 
     get days() {
-        for(let i = 0; i < this.timetables.length; i++) {
-            if(!this.timetables[i].length) {
-                return i;
+        for(let i = this.timetables.length - 1; i >= 0; i--) {
+            if(this.timetables[i].length) {
+                return i + 1;
             }
         }
-        return this.timetables.length;
+        return 0;
     }
     get courseList() {
         let list = new Set();
