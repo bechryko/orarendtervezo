@@ -1,5 +1,8 @@
 class Term {
     timetables = [];
+    #settings = {
+        dayZeroIndex: false,
+    };
 
     constructor(name) {
         this.name = name;
@@ -19,6 +22,13 @@ class Term {
     }
 
     addCourse(course) {
+        if(!this.#settings.dayZeroIndex) {
+            course.time.day--;
+        }
+        if(course.time.day < 0 || course.time.day > 6) {
+            console.warn(`Course ${course.name} is not in the week`);
+            return this;
+        }
         let index = 0;
         while(this.timetables[course.time.day].length > index && CourseTime.isEarlier(this.timetables[course.time.day][index].time, course.time)) {
             index++;
@@ -82,6 +92,10 @@ class Term {
             C.drawCourse(course, 1);
         }
         C.latestDraw = () => this.drawDay(day);
+        return this;
+    }
+    updateSettings(setting, value) {
+        this.#settings[setting] = value;
         return this;
     }
 
