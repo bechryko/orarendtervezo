@@ -22,9 +22,15 @@ sem_23_24_1.addCourse(new Course("Döntési rendszerek ea", new CourseTime(3, 8,
 
 //sem_23_24_1.addCourse(new Course("Köszi gyak", new CourseTime(1, 13, 0, 1), "", "Csendes Tibor", K_TEMP));
 sem_23_24_1.addCourse(new Course("Köszi gyak", new CourseTime(1, 14, 0, 1), "", "Csendes Tibor", K_TEMP));
+sem_23_24_1.addCourse(new Course("Köszi gyak", new CourseTime(1, 15, 0, 1), "", "Homolya Viktor", K_TEMP));
+//sem_23_24_1.addCourse(new Course("Köszi gyak", new CourseTime(1, 16, 0, 1), "", "Homolya Viktor", K_TEMP));
 
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(0, 12, 0, 1), "", "London András", K_TEMP));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(0, 13, 0, 1), "", "London András", K_TEMP));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 10, 0, 1), "", "Homolya Viktor", K_TEMP));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 11, 0, 1), "", "Homolya Viktor", K_TEMP));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 14, 0, 1), "", "Homolya Viktor", K_TEMP));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 15, 0, 1), "", "Homolya Viktor", K_TEMP));
 
 //sem_23_24_1.addCourse(new Course("Gazdinfó gyak", new CourseTime(1, 16, 0, 1), "", "London András", K_TEMP));
 sem_23_24_1.addCourse(new Course("Gazdinfó gyak", new CourseTime(3, 8, 0, 1), "", "Szász Attila", K_TEMP));
