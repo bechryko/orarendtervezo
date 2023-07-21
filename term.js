@@ -2,6 +2,8 @@ class Term {
     timetables = [];
     #settings = {
         dayZeroIndex: false,
+        showAllWeekdays: false,
+        showWeekend: false,
     };
 
     constructor(name) {
@@ -73,12 +75,13 @@ class Term {
         return course.split = Math.max(...childCrosses);
     }
     draw(onlyPrimary = false) {
+        let dayCount = this.#settings.showWeekend ? 7 : this.#settings.showAllWeekdays ? 5 : this.days;
         C.clear();
-        C.drawTermFrame(this);
+        C.drawTermFrame(this.name, dayCount);
         for(const day of this.timetables) {
             for(const course of day) {
                 if(!onlyPrimary || course.primary || !course.temp) {
-                    C.drawCourse(course, this.days);
+                    C.drawCourse(course, dayCount);
                 }
             }
         }

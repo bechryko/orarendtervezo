@@ -14,10 +14,10 @@ class Canvas {
         addEventListener("resize", e => this.resize());
     }
 
-    drawTermFrame(term) {
-        let dayWidth = Math.floor((this.width - this.margin) / term.days);
+    drawTermFrame(name, dayCount) {
+        let dayWidth = Math.floor((this.width - this.margin) / dayCount);
         this.line(this.margin, 0, this.margin, this.height, this.colorTheme, 5);
-        for(let i = 0; i < term.days; i++) {
+        for(let i = 0; i < dayCount; i++) {
             this.line(this.margin + i * dayWidth, 0, this.margin + i * dayWidth, this.height, this.colorTheme, 5);
             this.text(["H", "K", "Sze", "Cs", "P", "Szo", "V"][i], this.margin + (i + 0.5) * dayWidth, this.hourHeight / 2, this.hourHeight * 0.7, this.colorTheme, this.colorTheme);
         }
@@ -26,7 +26,7 @@ class Canvas {
             this.text(i + "-" + (i+1), this.margin / 2, (i - 6.5) * this.hourHeight, this.hourHeight * 0.7, this.colorTheme, this.colorTheme);
         }
 
-        this.text(term.name, this.margin / 2, this.hourHeight / 2, this.hourHeight * 0.4, this.colorTheme, this.colorTheme);
+        this.text(name, this.margin / 2, this.hourHeight / 2, this.hourHeight * 0.4, this.colorTheme, this.colorTheme);
     }
     drawDayFrame(term, day) {
         this.line(this.margin, 0, this.margin, this.height, this.colorTheme, 5);

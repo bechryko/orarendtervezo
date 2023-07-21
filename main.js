@@ -9,6 +9,7 @@ const LEVI_TEACHER = new CourseCategory("Levi tanári órái", "yellow");
 //SEMESTER
 const sem_23_24_1 = new Term("2023-24. 1. félév");
 sem_23_24_1.updateSettings("dayZeroIndex", true);
+sem_23_24_1.updateSettings("showAllWeekdays", true);
 
 // COURSES
 sem_23_24_1.addCourse(new Course("Gazdinfó ea", new CourseTime(0, 10, 0), "", "Bánhelyi Balázs", KRISTOF));
