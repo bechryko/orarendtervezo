@@ -72,4 +72,8 @@ sem_23_24_1.addCourse(new Course("Dimat1 gyak", new CourseTime(3, 16, 0), "", "T
 sem_23_24_1.addCourse(new Course("Dimat1 gyak", new CourseTime(3, 18, 0), "", "Tóth Endre", KRISTOF_TEACHER));
 sem_23_24_1.addCourse(new Course("Dimat1 gyak", new CourseTime(2, 18, 0), "", "Varga Kristóf", KRISTOF_TEACHER));
 
+sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(0, 16, 0, 1), "", "Lengyel Levente, Vass Levente", LEVI_TEACHER));
+sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(0, 17, 0, 1), "", "Lengyel Levente, Vass Levente", LEVI_TEACHER));
+sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(1, 17, 0, 1), "", "Lengyel Levente, Isztin Martin", LEVI_TEACHER));
+
 sem_23_24_1.splitTimetables().draw();
