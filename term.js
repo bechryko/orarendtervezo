@@ -36,9 +36,15 @@ class Term {
             index++;
         }
         this.timetables[course.time.day].splice(index, 0, course);
+        this.splitTimetables();
         return this;
     }
     splitTimetables() {
+        for(const day of this.timetables) {
+            for(const course of day) {
+                course.split = 0;
+            }
+        }
         for(const day of this.timetables) {
             for(const course of day) {
                 this.#calculateSplit(course);
