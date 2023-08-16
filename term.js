@@ -128,3 +128,13 @@ class Term {
         return list;
     }
 }
+
+class TermDay extends HTMLElement {
+    constructor() {
+        super();
+        const shadowRoot = this.attachShadow({ mode: "open" });
+        const container = document.createElement("div");
+        shadowRoot.append(container);
+    }
+}
+customElements.define("term-day", TermDay);

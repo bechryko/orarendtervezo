@@ -64,3 +64,12 @@ class CourseTime {
         return ct1.hour < ct2.hour || (ct1.hour == ct2.hour && ct1.min < ct2.min);
     }
 }
+
+class TermCourse extends HTMLElement {
+    constructor() {
+        super();
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        const container = document.createElement('div');
+        container.classList.add('course');
+    }
+}
