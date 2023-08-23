@@ -12,7 +12,7 @@ class Course {
 
     isTimeDuringThis(time) {
         let startOfThis = this.time.hour * 60 + this.time.min;
-        let endOfThis = startOfThis + this.time.length * 45;
+        let endOfThis = startOfThis + this.time.length;
         time = time.hour * 60 + time.min;
         return startOfThis <= time && time < endOfThis;
     }
@@ -53,7 +53,7 @@ class CourseCategory {
 }
 
 class CourseTime {
-    constructor(day, hour, min, length = 2) {
+    constructor(day, hour, min, length = 90) {
         this.day = day;
         this.hour = hour;
         this.min = min;

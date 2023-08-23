@@ -45,12 +45,12 @@ class Canvas {
         let dayWidth = (this.width - this.margin) / days;
         let centerX = this.margin + (course.time.day * (days != 1) + course.width / 2 + course.width * course.splitPlace) * dayWidth;
         let startY = course.time.hour + course.time.min / 60 - 7;
-        this.rectangle(centerX, (startY + course.time.length * 0.75 / 2) * this.hourHeight, (dayWidth - 5) * course.width, course.time.length * 0.75 * this.hourHeight - 5, undefined, course.category.color);
+        this.rectangle(centerX, (startY + course.time.length * 0.75 / 90) * this.hourHeight, (dayWidth - 5) * course.width, course.time.length * 0.75 / 45 * this.hourHeight - 5, undefined, course.category.color);
         this.text(course.name, centerX, (startY + 0.2) * this.hourHeight, this.hourHeight * 0.25, this.colorTheme, this.colorTheme);
         this.text(course.teacher, centerX, (startY + 0.5) * this.hourHeight, this.hourHeight * 0.2, this.colorTheme, this.colorTheme);
         if(course.disabled) {
-            this.line(centerX - (dayWidth - 5) * course.width / 2, startY * this.hourHeight, centerX + (dayWidth - 5) * course.width / 2, (startY + course.time.length * 0.75) * this.hourHeight - 5, "red", 3);
-            this.line(centerX + (dayWidth - 5) * course.width / 2, startY * this.hourHeight, centerX - (dayWidth - 5) * course.width / 2, (startY + course.time.length * 0.75) * this.hourHeight - 5, "red", 3);
+            this.line(centerX - (dayWidth - 5) * course.width / 2, startY * this.hourHeight, centerX + (dayWidth - 5) * course.width / 2, (startY + course.time.length * 0.75 / 45) * this.hourHeight - 5, "red", 3);
+            this.line(centerX + (dayWidth - 5) * course.width / 2, startY * this.hourHeight, centerX - (dayWidth - 5) * course.width / 2, (startY + course.time.length * 0.75 / 45) * this.hourHeight - 5, "red", 3);
         }
         this.globalAlpha = 1;
     }
