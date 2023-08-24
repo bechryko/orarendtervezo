@@ -11,16 +11,6 @@ class Term {
         for(let i = 0; i < 7; i++) {
             this.timetables[i] = [];
         }
-        
-        document.addEventListener("keydown", e => {
-            if(e.key >= '1' && e.key <= '7') {
-                this.drawDay(e.key - 1);
-            } else if(e.key == "p") {
-                this.draw(true);
-            } else if(e.key[0] != "F") {
-                this.draw();
-            }
-        });
     }
 
     addCourse(course) {
@@ -80,29 +70,6 @@ class Term {
         }
         return course.split = Math.max(...childCrosses);
     }
-    draw(onlyPrimary = false) {
-        let dayCount = this.#settings.showWeekend ? 7 : this.#settings.showAllWeekdays ? 5 : this.days;
-        C.clear();
-        C.drawTermFrame(this.name, dayCount);
-        for(const day of this.timetables) {
-            for(const course of day) {
-                if(!onlyPrimary || course.primary || !course.temp) {
-                    C.drawCourse(course, dayCount);
-                }
-            }
-        }
-        C.latestDraw = () => this.draw();
-        return this;
-    }
-    drawDay(day) {
-        C.clear();
-        C.drawDayFrame(this, day);
-        for(const course of this.timetables[day]) {
-            C.drawCourse(course, 1);
-        }
-        C.latestDraw = () => this.drawDay(day);
-        return this;
-    }
     updateSettings(setting, value) {
         this.#settings[setting] = value;
         return this;
@@ -130,11 +97,41 @@ class Term {
 }
 
 class TermDay extends HTMLElement {
+    courses = [];
+    #container;
+
     constructor() {
         super();
         const shadowRoot = this.attachShadow({ mode: "open" });
-        const container = document.createElement("div");
-        shadowRoot.append(container);
+        this.#container = document.createElement("div");
+        shadowRoot.append(this.#container);
+        const style = document.createElement("style");
+        style.textContent = `
+            div {
+                position: relative;
+                width: 100%;
+            }
+            term-course {
+                position: absolute;
+                width: 100%;
+            }
+            `;
+        shadowRoot.append(style);
+    }
+
+    addCourses(courses) {
+        if(!Array.isArray(courses)) {
+            courses = [courses];
+        }
+        this.courses.push(courses.map(course => {
+            const retVal = {
+                courseObject: course,
+                courseElement: document.createElement("term-course")
+            };
+            retVal.courseElement.syncWithCourseObject(course);
+            this.#container.append(retVal.courseElement);
+            return retVal;
+        }));
     }
 }
 customElements.define("term-day", TermDay);
