@@ -70,8 +70,9 @@ class TermCourse extends HTMLElement {
          case 'temporary':
             this.#container.style.opacity = TermCourse.TEMPORARY_OPACITY;
             break;
-         case 'excluded':
-            //TODO
+         case 'disabled':
+            this.#container.style.borderWidth = "0.5vw";
+            this.#container.style.borderColor = "red";
             break;
          case 'split':
             const split = JSON.parse(newValue);
@@ -87,7 +88,7 @@ class TermCourse extends HTMLElement {
       this.teacher = courseObject.teacher;
       this.color = courseObject.color;
       this.primary = courseObject.primary;
-      this.excluded = courseObject.disabled;
+      this.disabled = courseObject.disabled;
       this.temporary = courseObject.temporary;
       this.split = JSON.stringify({
          split: courseObject.split,
@@ -98,7 +99,7 @@ class TermCourse extends HTMLElement {
    static get observedAttributes() {
       return [
          'name', 'time', 'place', 'teacher',
-         'color', 'primary', 'excluded', 'temporary', 'split'
+         'color', 'primary', 'disabled', 'temporary', 'split'
       ];
    }
 
@@ -148,14 +149,14 @@ class TermCourse extends HTMLElement {
       }
    }
 
-   get excluded() {
-      return this.hasAttribute('excluded');
+   get disabled() {
+      return this.hasAttribute('disabled');
    }
-   set excluded(value) {
+   set disabled(value) {
       if (value) {
-         this.setAttribute('excluded', '');
+         this.setAttribute('disabled', '');
       } else {
-         this.removeAttribute('excluded');
+         this.removeAttribute('disabled');
       }
    }
 
