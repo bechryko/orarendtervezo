@@ -10,3 +10,11 @@ const isColorDark = (hex) => {
    const brightness = Math.round(((red * 299) + (green * 587) + (blue * 114)) / 1000);
    return brightness < DARK_COLOR_THRESHOLD;
 }
+
+const $ = (id) => document.getElementById(id);
+
+const removeChildren = (element) => {
+   while(element.firstChild) {
+      element.removeChild(element.firstChild);
+   }
+}

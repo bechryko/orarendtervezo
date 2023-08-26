@@ -12,10 +12,10 @@ function chooseTermToDisplay(term) {
 
 const setup = {
    termTitle(term) {
-      document.getElementById("term-name").innerText = term.name;
+      $("term-name").innerText = term.name;
    },
    dayNames(term) {
-      const dayNamesContainer = document.getElementById("day-names");
+      const dayNamesContainer = $("day-names");
       dayNamesContainer.style.gridTemplateColumns = `repeat(${term.days}, 1fr)`;
       removeChildren(dayNamesContainer);
       for (let i = 0; i < term.days; i++) {
@@ -25,7 +25,7 @@ const setup = {
       }
    },
    oneDayName(dayNumber) {
-      const dayNamesContainer = document.getElementById("day-names");
+      const dayNamesContainer = $("day-names");
       dayNamesContainer.style.gridTemplateColumns = `1fr`;
       removeChildren(dayNamesContainer);
       const element = document.createElement("h2");
@@ -33,7 +33,7 @@ const setup = {
       dayNamesContainer.append(element);
    },
    hours() {
-      const hoursContainer = document.getElementById("hours");
+      const hoursContainer = $("hours");
       removeChildren(hoursContainer);
       hoursContainer.style.gridTemplateRows = `repeat(${END_HOUR - STARTING_HOUR}, 1fr)`;
       hoursContainer.style.height = `${getHourHeight() * (END_HOUR - STARTING_HOUR)}px`;
@@ -46,13 +46,14 @@ const setup = {
    },
    termDays(term) {
       const multiDayGridStyle = `repeat(${term.days}, 1fr)`;
-      removeChildren(TIMETABLE_CONTAINER);
-      TIMETABLE_CONTAINER.style.gridTemplateColumns = multiDayGridStyle;
+      const timetablesContainer = $("timetables");
+      removeChildren(timetablesContainer);
+      timetablesContainer.style.gridTemplateColumns = multiDayGridStyle;
       const elements = [];
       for (let i = 0; i < term.days; i++) {
          const element = document.createElement("term-day");
          element.addCourses(term.timetables[i]);
-         TIMETABLE_CONTAINER.append(element);
+         timetablesContainer.append(element);
          elements.push(element);
       }
 
@@ -60,7 +61,7 @@ const setup = {
          if (e.key >= 1 && e.key <= term.days) {
             elements.forEach(element => element.style.display = "none");
             elements[e.key - 1].style.display = "block";
-            TIMETABLE_CONTAINER.style.gridTemplateColumns = '1fr';
+            timetablesContainer.style.gridTemplateColumns = '1fr';
             setup.oneDayName(e.key);
          } else if (e.key == "p") {
             TermCourse.elementList
@@ -68,7 +69,7 @@ const setup = {
                .forEach(element => element.toggleVisibility());
          } else if (e.key[0] != "F") {
             elements.forEach(element => element.style.display = "block");
-            TIMETABLE_CONTAINER.style.gridTemplateColumns = multiDayGridStyle;
+            timetablesContainer.style.gridTemplateColumns = multiDayGridStyle;
             setup.dayNames(term);
          }
       });
@@ -77,11 +78,5 @@ const setup = {
 Object.defineProperty(setup, "oneDayName", {
    enumerable: false
 });
-
-function removeChildren(element) {
-   while (element.firstChild) {
-      element.removeChild(element.firstChild);
-   }
-}
 
 chooseTermToDisplay(sem_23_24_1);

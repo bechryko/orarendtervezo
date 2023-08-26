@@ -39,7 +39,7 @@ class Term {
         for(const day of this.timetables) {
             for(const course of day) {
                 course.splitPlace = 0;
-                let startingC = course.getCoursesWhenThisStarts(this).filter(c => c.splitPlace !== undefined);
+                const startingC = course.getCoursesWhenThisStarts(this).filter(c => c.splitPlace !== undefined);
                 outer:
                 for(let sp = 0; sp < course.split; sp++) {
                     for(const c of startingC) {

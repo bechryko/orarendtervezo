@@ -16,9 +16,9 @@ class Course {
     }
 
     #isTimeDuringThis(time) {
-        const startOfThis = this.time.hour * 60 + this.time.min;
+        const startOfThis = this.time.toMin();
         const endOfThis = startOfThis + this.time.length;
-        time = time.hour * 60 + time.min;
+        time = time.toMin();
         return startOfThis <= time && time < endOfThis;
     }
     getCrossingCourses(term) {

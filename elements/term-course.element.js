@@ -3,22 +3,22 @@ class TermCourse extends HTMLElement {
 
    static elementList = [];
 
+   #container;
+   #courseName;
+   #courseTime;
+   #coursePlace;
+   #courseTeacher;
+
    constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: 'open' });
-      const container = document.createElement('div');
-      container.classList.add('course');
-      const name = document.createElement('h2');
-      const time = document.createElement('p');
-      const place = document.createElement('p');
-      const teacher = document.createElement('p');
-      container.appendChild(name);
-      container.appendChild(time);
-      container.appendChild(place);
-      container.appendChild(teacher);
-      shadowRoot.appendChild(container);
-      const style = document.createElement('style');
-      style.textContent = `
+      this.#container = shadowRoot.createChild('div');
+      this.#container.classList.add('course');
+      this.#courseName = this.#container.createChild('h2');
+      this.#courseTime = this.#container.createChild('p');
+      this.#coursePlace = this.#container.createChild('p');
+      this.#courseTeacher = this.#container.createChild('p');
+      shadowRoot.createChild('style').textContent = `
          div {
                padding: 0;
                border-radius: 1vh;
@@ -38,7 +38,6 @@ class TermCourse extends HTMLElement {
                font-size: 1.25vh;
          }
          `;
-      shadowRoot.appendChild(style);
       TermCourse.elementList.push(this);
    }
 
@@ -49,34 +48,34 @@ class TermCourse extends HTMLElement {
    attributeChangedCallback(name, _, newValue) {
       switch (name) {
          case 'name':
-            this.shadowRoot.querySelector('h2').innerText = newValue;
+            this.#courseName.innerText = newValue;
             break;
          case 'time':
-            this.shadowRoot.querySelector('p:nth-child(2)').innerText = this.#getFormattedTime();
+            this.#courseTime.innerText = this.#getFormattedTime();
             const time = JSON.parse(newValue);
-            this.shadowRoot.querySelector('div').style.height = getHourHeight() * time.length / 60 + "px";
-            this.shadowRoot.querySelector('div').style.top = getHourHeight() * (time.hour - STARTING_HOUR + time.min / 60) + "px";
+            this.#container.style.height = getHourHeight() * time.length / 60 + "px";
+            this.#container.style.top = getHourHeight() * (time.hour - STARTING_HOUR + time.min / 60) + "px";
             break;
          case 'place':
-            this.shadowRoot.querySelector('p:nth-child(3)').innerText = newValue;
+            this.#coursePlace.innerText = newValue;
             break;
          case 'teacher':
-            this.shadowRoot.querySelector('p:nth-child(4)').innerText = newValue;
+            this.#courseTeacher.innerText = newValue;
             break;
          case 'color':
-            this.shadowRoot.querySelector('div').style.backgroundColor = newValue;
-            this.shadowRoot.querySelector('div').style.color = isColorDark(newValue) ? 'white' : 'black';
+            this.#container.style.backgroundColor = newValue;
+            this.#container.style.color = isColorDark(newValue) ? 'white' : 'black';
             break;
          case 'temporary':
-            this.shadowRoot.querySelector('div').style.opacity = TermCourse.TEMPORARY_OPACITY;
+            this.#container.style.opacity = TermCourse.TEMPORARY_OPACITY;
             break;
          case 'excluded':
             //TODO
             break;
          case 'split':
             const split = JSON.parse(newValue);
-            this.shadowRoot.querySelector('div').style.width = 100 / split.split + "%";
-            this.shadowRoot.querySelector('div').style.right = 100 / split.split * split.splitPlace + "%";
+            this.#container.style.width = 100 / split.split + "%";
+            this.#container.style.right = 100 / split.split * split.splitPlace + "%";
       }
    }
 

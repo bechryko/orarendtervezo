@@ -1,14 +1,13 @@
 class TermDay extends HTMLElement {
    courses = [];
+
    #container;
 
    constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: "open" });
-      this.#container = document.createElement("div");
-      shadowRoot.append(this.#container);
-      const style = document.createElement("style");
-      style.textContent = `
+      this.#container = shadowRoot.createChild("div");
+      shadowRoot.createChild("style").textContent = `
          div {
                position: relative;
                width: 100%;
@@ -18,7 +17,6 @@ class TermDay extends HTMLElement {
                width: 100%;
          }
          `;
-      shadowRoot.append(style);
    }
 
    addCourses(courses) {
