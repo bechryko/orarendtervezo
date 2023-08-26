@@ -13,8 +13,12 @@ class Term {
     }
 
     addCourse(course) {
+        if(!course.time) {
+            console.warn(`Course '${course.name}' has no time specified`);
+            return this;
+        }
         if(course.time.day < 0 || course.time.day > 6) {
-            console.warn(`Course ${course.name} is not in the week`);
+            console.warn(`Course '${course.name}' is not in the week`);
             return this;
         }
         let index = 0;

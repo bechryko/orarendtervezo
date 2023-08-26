@@ -16,6 +16,9 @@ class Course {
     }
 
     #isTimeDuringThis(time) {
+        if(!this.time || !time) {
+            return false;
+        }
         const startOfThis = this.time.toMin();
         const endOfThis = startOfThis + this.time.length;
         time = time.toMin();
@@ -32,6 +35,9 @@ class Course {
     }
     getCoursesWhenThisStarts(term) {
         const c = [];
+        if(!this.time) {
+            return c;
+        }
         for(const course of term.timetables[this.time.day]) {
             if(course.#isTimeDuringThis(this.time)) {
                 c.push(course);
