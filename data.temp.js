@@ -1,10 +1,10 @@
 // CATEGORIES
-const KRISTOF = new CourseCategory("Kristóf órái", "forestgreen", { primary: true });
-const K_TEMP = new CourseCategory("Kristófnak választani egyet", "lime", { temporary: true });
-const KOZOS = new CourseCategory("Levi és Kristóf órái", "cyan", { primary: true });
+const KRISTOF = new CourseCategory("Kristóf órái", "#228b22", { primary: true });
+const K_TEMP = new CourseCategory("Kristófnak választani egyet", "#00ff00", { temporary: true });
+const KOZOS = new CourseCategory("Levi és Kristóf órái", "#00ffff", { primary: true });
 const TEMP = new CourseCategory("választani egyet", "#6fe0e1", { temporary: true });
-const KRISTOF_TEACHER = new CourseCategory("Kristóf tanári órái", "red");
-const LEVI_TEACHER = new CourseCategory("Levi tanári órái", "yellow");
+const KRISTOF_TEACHER = new CourseCategory("Kristóf tanári órái", "#ff0000");
+const LEVI_TEACHER = new CourseCategory("Levi tanári órái", "#ffff00");
 
 //SEMESTER
 const sem_23_24_1 = new Term("2023-24. 1. félév");

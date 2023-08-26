@@ -65,6 +65,7 @@ class TermCourse extends HTMLElement {
             break;
          case 'color':
             this.shadowRoot.querySelector('div').style.backgroundColor = newValue;
+            this.shadowRoot.querySelector('div').style.color = isColorDark(newValue) ? 'white' : 'black';
             break;
          case 'temporary':
             this.shadowRoot.querySelector('div').style.opacity = TermCourse.TEMPORARY_OPACITY;
