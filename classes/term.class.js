@@ -1,7 +1,6 @@
 class Term {
     timetables = [];
     #settings = {
-        dayZeroIndex: false,
         showAllWeekdays: false,
         showWeekend: false,
     };
@@ -14,9 +13,6 @@ class Term {
     }
 
     addCourse(course) {
-        if(!this.#settings.dayZeroIndex) {
-            course.time.day--;
-        }
         if(course.time.day < 0 || course.time.day > 6) {
             console.warn(`Course ${course.name} is not in the week`);
             return this;
@@ -26,10 +22,10 @@ class Term {
             index++;
         }
         this.timetables[course.time.day].splice(index, 0, course);
-        this.splitTimetables();
+        this.#splitTimetables();
         return this;
     }
-    splitTimetables() {
+    #splitTimetables() {
         for(const day of this.timetables) {
             for(const course of day) {
                 course.split = 0;
@@ -62,26 +58,27 @@ class Term {
         if(course.split) {
             return course.split;
         }
-        let crossing = course.getCrossingCourses(this);
+        const crossing = course.getCrossingCourses(this);
         course.split = course.getCoursesWhenThisStarts(this).length;
-        let childCrosses = [];
+        const childCrosses = [];
         for(const cross of crossing) {
             childCrosses.push(this.#calculateSplit(cross));
         }
         return course.split = Math.max(...childCrosses);
     }
     updateSettings(setting, value) {
-        this.#settings[setting] = value;
+        this.#settings[setting] = !!value;
         return this;
     }
 
     get days() {
+        const minDays = this.#settings.showAllWeekdays ? 5 : this.#settings.showWeekend ? 7 : 1;
         for(let i = this.timetables.length - 1; i >= 0; i--) {
             if(this.timetables[i].length) {
-                return i + 1;
+                return Math.max(minDays, i + 1);
             }
         }
-        return 0;
+        return minDays;
     }
     get courseList() {
         let list = new Set();

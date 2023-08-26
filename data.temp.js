@@ -1,15 +1,13 @@
 // CATEGORIES
-const KRISTOF = new CourseCategory("Kristóf órái", "forestgreen");
-const K_TEMP = new CourseCategory("Kristófnak választani egyet", "lime", true);
-const KOZOS = new CourseCategory("Levi és Kristóf órái", "cyan");
-const TEMP = new CourseCategory("választani egyet", "#6fe0e1", true);
+const KRISTOF = new CourseCategory("Kristóf órái", "forestgreen", { primary: true });
+const K_TEMP = new CourseCategory("Kristófnak választani egyet", "lime", { temporary: true });
+const KOZOS = new CourseCategory("Levi és Kristóf órái", "cyan", { primary: true });
+const TEMP = new CourseCategory("választani egyet", "#6fe0e1", { temporary: true });
 const KRISTOF_TEACHER = new CourseCategory("Kristóf tanári órái", "red");
 const LEVI_TEACHER = new CourseCategory("Levi tanári órái", "yellow");
 
 //SEMESTER
 const sem_23_24_1 = new Term("2023-24. 1. félév");
-sem_23_24_1.updateSettings("dayZeroIndex", true);
-sem_23_24_1.updateSettings("showAllWeekdays", true);
 
 // COURSES
 sem_23_24_1.addCourse(new Course("Gazdinfó ea", new CourseTime(0, 10, 0), "", "Bánhelyi Balázs", KRISTOF));
@@ -17,7 +15,7 @@ sem_23_24_1.addCourse(new Course("LaTeX ea", new CourseTime(0, 14, 0, 45), "", "
 sem_23_24_1.addCourse(new Course("LaTeX gyak", new CourseTime(0, 15, 0, 45), "", "Virágh János", KRISTOF));
 sem_23_24_1.addCourse(new Course("Köszi ea", new CourseTime(1, 8, 0), "", "Csendes Tibor", KRISTOF));
 sem_23_24_1.addCourse(new Course("Bonya ea", new CourseTime(1, 10, 0), "", "Szabiván", KOZOS));
-sem_23_24_1.addCourse(new Course("Dimat1 ea", new CourseTime(1, 12, 0), "", "Dormán Miklós", KRISTOF_TEACHER));
+sem_23_24_1.addCourse(new Course("Dimat1 ea", new CourseTime(1, 12, 0), "", "Dormán Miklós", KRISTOF_TEACHER, { primary: true }));
 sem_23_24_1.addCourse(new Course("Fuzzy ea", new CourseTime(1, 16, 0, 45), "", "Dombi József", KRISTOF));
 sem_23_24_1.addCourse(new Course("Fuzzy gyak", new CourseTime(1, 17, 0, 45), "", "Dombi József", KRISTOF));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek ea", new CourseTime(3, 8, 0), "", "Pluhár András", KRISTOF));
@@ -74,4 +72,4 @@ sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(0, 16, 0, 45
 sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(0, 17, 0, 45), "", "Lengyel Levente, Vass Levente", LEVI_TEACHER));
 sem_23_24_1.addCourse(new Course("Számháló gyak", new CourseTime(1, 17, 0, 45), "", "Lengyel Levente, Isztin Martin", LEVI_TEACHER));
 
-sem_23_24_1.addCourse(new Course("Progalap gyak", new CourseTime(2, 8, 0, 150), "", "Goldman Júlia, Kozma Kristóf, Vad Avar", KRISTOF_TEACHER));
+//sem_23_24_1.addCourse(new Course("Progalap gyak", new CourseTime(2, 8, 0, 150), "", "Goldman Júlia, Kozma Kristóf, Vad Avar", KRISTOF_TEACHER));

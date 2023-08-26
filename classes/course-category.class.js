@@ -1,8 +1,11 @@
 class CourseCategory {
-   constructor(name, color, temp, disabled) {
+   constructor(name, color, config = {
+      primary: false,
+      temporary: false,
+      disabled: false
+   }) {
       this.name = name;
       this.color = color;
-      this.temp = temp;
-      this.disabled = disabled;
+      this.config = config;
    }
 }

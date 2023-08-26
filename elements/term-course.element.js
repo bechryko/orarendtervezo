@@ -1,4 +1,8 @@
 class TermCourse extends HTMLElement {
+   static TEMPORARY_OPACITY = 0.5;
+
+   static elementList = [];
+
    constructor() {
       super();
       const shadowRoot = this.attachShadow({ mode: 'open' });
@@ -35,6 +39,11 @@ class TermCourse extends HTMLElement {
          }
          `;
       shadowRoot.appendChild(style);
+      TermCourse.elementList.push(this);
+   }
+
+   toggleVisibility() {
+      this.style.visibility = this.style.visibility == "hidden" ? "visible" : "hidden";
    }
 
    attributeChangedCallback(name, _, newValue) {
@@ -58,7 +67,7 @@ class TermCourse extends HTMLElement {
             this.shadowRoot.querySelector('div').style.backgroundColor = newValue;
             break;
          case 'temporary':
-            this.shadowRoot.querySelector('div').style.opacity = COURSE_ELEMENT.TEMPORARY_OPACITY;
+            this.shadowRoot.querySelector('div').style.opacity = TermCourse.TEMPORARY_OPACITY;
             break;
          case 'excluded':
             //TODO
@@ -75,9 +84,10 @@ class TermCourse extends HTMLElement {
       this.time = JSON.stringify(courseObject.time);
       this.place = courseObject.place;
       this.teacher = courseObject.teacher;
-      this.color = courseObject.category.color;
+      this.color = courseObject.color;
+      this.primary = courseObject.primary;
       this.excluded = courseObject.disabled;
-      this.temporary = courseObject.temp;
+      this.temporary = courseObject.temporary;
       this.split = JSON.stringify({
          split: courseObject.split,
          splitPlace: courseObject.splitPlace
@@ -87,7 +97,7 @@ class TermCourse extends HTMLElement {
    static get observedAttributes() {
       return [
          'name', 'time', 'place', 'teacher',
-         'color', 'excluded', 'temporary', 'split'
+         'color', 'primary', 'excluded', 'temporary', 'split'
       ];
    }
 
@@ -124,6 +134,17 @@ class TermCourse extends HTMLElement {
    }
    set color(value) {
       this.setAttribute('color', value);
+   }
+
+   get primary() {
+      return this.hasAttribute('primary');
+   }
+   set primary(value) {
+      if (value) {
+         this.setAttribute('primary', '');
+      } else {
+         this.removeAttribute('primary');
+      }
    }
 
    get excluded() {

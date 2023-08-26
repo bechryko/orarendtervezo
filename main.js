@@ -55,7 +55,9 @@ const setup = {
             TIMETABLE_CONTAINER.style.gridTemplateColumns = '1fr';
             setup.oneDayName(e.key);
          } else if (e.key == "p") {
-            //TODO: hide temporary courses
+            TermCourse.elementList
+               .filter(element => !element.primary)
+               .forEach(element => element.toggleVisibility());
          } else if (e.key[0] != "F") {
             elements.forEach(element => element.style.display = "block");
             TIMETABLE_CONTAINER.style.gridTemplateColumns = multiDayGridStyle;
