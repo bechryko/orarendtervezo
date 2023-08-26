@@ -33,6 +33,7 @@ class TermCourse extends HTMLElement {
          }
          h2 {
                font-size: 2vh;
+               margin-bottom: 0.5vh;
          }
          p {
                font-size: 1.25vh;
