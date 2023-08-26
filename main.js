@@ -3,6 +3,11 @@ function chooseTermToDisplay(term) {
    for(const phase in setup) {
       setup[phase](term);
    }
+   
+   window.addEventListener("resize", () => {
+      setup.hours();
+      setup.termDays(term);
+   });
 }
 
 const setup = {
@@ -29,16 +34,19 @@ const setup = {
    },
    hours() {
       const hoursContainer = document.getElementById("hours");
+      removeChildren(hoursContainer);
       hoursContainer.style.gridTemplateRows = `repeat(${END_HOUR - STARTING_HOUR}, 1fr)`;
       hoursContainer.style.height = `${getHourHeight() * (END_HOUR - STARTING_HOUR)}px`;
       for (let i = STARTING_HOUR; i < END_HOUR; i++) {
          const element = document.createElement("h2");
          element.innerText = i;
+         element.style.fontSize = `${getHourHeight() / 2}px`;
          hoursContainer.append(element);
       }
    },
    termDays(term) {
-      const multiDayGridStyle = `repeat(${term.days}, 1fr)`
+      const multiDayGridStyle = `repeat(${term.days}, 1fr)`;
+      removeChildren(TIMETABLE_CONTAINER);
       TIMETABLE_CONTAINER.style.gridTemplateColumns = multiDayGridStyle;
       const elements = [];
       for (let i = 0; i < term.days; i++) {
