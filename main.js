@@ -84,4 +84,8 @@ $("term-name").addEventListener("click", () => {
    $("ui").style.display = "grid";
 });
 
+$("new-term-button").onclick = () => {
+   UIController.createTerm($("new-term-name").value);
+};
+
 chooseTermToDisplay(sem_23_24_1);
