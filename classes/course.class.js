@@ -47,6 +47,6 @@ class Course {
     }
 
     get width() {
-        return 1 / this.split;
+        return 1 / this.locationInterval.split * this.locationInterval.size;
     }
 }

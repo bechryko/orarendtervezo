@@ -32,7 +32,7 @@ class Term {
     #splitTimetables() {
         for(const day of this.timetables) {
             for(const course of day) {
-                course.split = 0;
+                course.locationInterval = null;
             }
         }
         for(const day of this.timetables) {
@@ -42,33 +42,24 @@ class Term {
         }
         for(const day of this.timetables) {
             for(const course of day) {
-                course.splitPlace = 0;
-                const startingC = course.getCoursesWhenThisStarts(this).filter(c => c.splitPlace !== undefined);
-                outer:
-                for(let sp = 0; sp < course.split; sp++) {
-                    for(const c of startingC) {
-                        if(c.splitPlace == sp) {
-                            continue outer;
-                        }
-                    }
-                    course.splitPlace = sp;
-                    break;
-                }
+                const crossingCourses = course.getCrossingCourses(this);
+                course.locationInterval.startPlace = LocationInterval.getFirstAvailablePlace(course, ...crossingCourses);
+                course.locationInterval.size = 1;
             }
         }
         return this;
     }
     #calculateSplit(course) {
-        if(course.split) {
-            return course.split;
+        if(course.locationInterval) {
+            return course.locationInterval.split;
         }
         const crossing = course.getCrossingCourses(this);
-        course.split = course.getCoursesWhenThisStarts(this).length;
+        course.locationInterval = new LocationInterval(course.getCoursesWhenThisStarts(this).length, 0, 0);
         const childCrosses = [];
         for(const cross of crossing) {
             childCrosses.push(this.#calculateSplit(cross));
         }
-        return course.split = Math.max(...childCrosses);
+        return course.locationInterval.split = Math.max(course.locationInterval.split, ...childCrosses);
     }
     updateSettings(setting, value) {
         this.#settings[setting] = !!value;
