@@ -77,7 +77,7 @@ class TermCourse extends HTMLElement {
          case 'locationInterval':
             const locationInterval = JSON.parse(newValue);
             this.#container.style.width = 100 / locationInterval.split * locationInterval.size + "%";
-            this.#container.style.right = 100 / locationInterval.split * locationInterval.startPlace + "%";
+            this.#container.style.left = 100 / locationInterval.split * locationInterval.startPlace + "%";
             break;
       }
    }

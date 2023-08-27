@@ -6,15 +6,16 @@ class LocationInterval {
    }
 
    static getFirstAvailablePlace(...courses) {
-      const places = [];
-      for(const course of courses.filter(course => course.locationInterval.size)) {
-         places.push(course.locationInterval.startPlace);
+      const places = new Set();
+      for(const course of courses.filter(course => course.locationInterval?.size)) {
+         places.add(course.locationInterval.startPlace);
       }
-      places.sort((a, b) => a - b);
-      let i = 0;
-      while(places[i] === i) {
-         i++;
+      for(let i = 0; i < courses.length; i++) {
+         if(!places.has(i)) {
+            return i;
+         }
       }
-      return i;
+      console.error("No available place found for course", courses);
+      return 0;
    }
 }

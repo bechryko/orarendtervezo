@@ -26,26 +26,21 @@ class Term {
             index++;
         }
         this.timetables[course.time.day].splice(index, 0, course);
-        this.#splitTimetables();
+        this.#splitTimetable(course.time.day);
         return this;
     }
-    #splitTimetables() {
-        for(const day of this.timetables) {
-            for(const course of day) {
-                course.locationInterval = null;
-            }
+    #splitTimetable(day) {
+        const daySorted = this.timetables[day].slice().sort((a, b) => b.time.length - a.time.length);
+        for(const course of daySorted) {
+            course.locationInterval = null;
         }
-        for(const day of this.timetables) {
-            for(const course of day) {
-                this.#calculateSplit(course);
-            }
+        for(const course of daySorted) {
+            this.#calculateSplit(course);
         }
-        for(const day of this.timetables) {
-            for(const course of day) {
-                const crossingCourses = course.getCrossingCourses(this);
-                course.locationInterval.startPlace = LocationInterval.getFirstAvailablePlace(course, ...crossingCourses);
-                course.locationInterval.size = 1;
-            }
+        for(const course of daySorted) {
+            const crossingCourses = course.getCrossingCourses(this);
+            course.locationInterval.startPlace = LocationInterval.getFirstAvailablePlace(course, ...crossingCourses);
+            course.locationInterval.size = 1;
         }
         return this;
     }
@@ -59,7 +54,11 @@ class Term {
         for(const cross of crossing) {
             childCrosses.push(this.#calculateSplit(cross));
         }
-        return course.locationInterval.split = Math.max(course.locationInterval.split, ...childCrosses);
+        course.locationInterval.split = Math.max(course.locationInterval.split, ...childCrosses);
+        for(const cross of crossing) {
+            cross.locationInterval.split = Math.max(cross.locationInterval.split, course.locationInterval.split);
+        }
+        return course.locationInterval.split;
     }
     updateSettings(setting, value) {
         this.#settings[setting] = !!value;
