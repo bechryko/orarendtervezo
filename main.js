@@ -81,7 +81,7 @@ Object.defineProperty(setup, "oneDayName", {
 
 $("term-name").addEventListener("click", () => {
    $("term-display").style.display = "none";
-   $("ui").style.display = "block";
+   $("ui").style.display = "grid";
 });
 
 chooseTermToDisplay(sem_23_24_1);

@@ -39,9 +39,20 @@
             #ui {
                 grid-template-columns: repeat(3, 1fr);
             }
-            #ui div {
+            #ui > div {
                 border: 1px solid black;
                 margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+            #ui > div > * {
+                margin: 1vw;
+            }
+            term-list-element:nth-child(odd) {
+                background-color: rgb(255, 121, 121);
+            }
+            term-list-element:nth-child(even) {
+                background-color: rgb(253, 223, 134);
             }
         </style>
     </head>
@@ -53,8 +64,20 @@
             <div id="timetables"></div>
         </section>
         <section id="ui">
-            <div id="term-chooser"></div>
-            <div id="course-chooser"></div>
+            <div id="term-chooser">
+                <div>
+                    <input type="text" id="new-term-name">
+                    <button>Create new term</button>
+                </div>
+                <div id="term-list"></div>
+            </div>
+            <div id="course-chooser">
+                <div>
+                    <input type="text" id="new-course-name">
+                    <button>Create new course</button>
+                </div>
+                <div id="course-list"></div>
+            </div>
             <div id="settings"></div>
         </section>
         <script src="utils/technical.utils.js"></script>
@@ -66,6 +89,7 @@
         <script src="classes/course-time.class.js"></script>
         <script src="classes/course.class.js"></script>
         <script src="classes/term.class.js"></script>
+        <script src="components/ui/term-list-element.component.js"></script>
         <script src="components/display/term-course.component.js"></script>
         <script src="components/display/term-day.component.js"></script>
         <script src="temp/data.temp.js"></script>

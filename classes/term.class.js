@@ -1,4 +1,6 @@
 class Term {
+    static list = [];
+
     timetables = [];
     #settings = {
         showAllWeekdays: false,
@@ -10,6 +12,8 @@ class Term {
         for(let i = 0; i < 7; i++) {
             this.timetables[i] = [];
         }
+        $("term-list").createChild("term-list-element").title = name;
+        Term.list.push(this);
     }
 
     addCourse(course) {
