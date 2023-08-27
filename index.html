@@ -17,7 +17,8 @@
                 font-size: 2vw;
                 margin: auto;
             }
-            #term-display, div#timetables, div#hours, div#day-names {
+            #term-display, div#timetables, div#hours, div#day-names,
+            #ui {
                 display: grid;
                 width: 100%;
                 height: 100%;
@@ -35,6 +36,13 @@
             term-day {
                 width: 100%;
             }
+            #ui {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            #ui div {
+                border: 1px solid black;
+                margin: 0;
+            }
         </style>
     </head>
     <body>
@@ -44,7 +52,11 @@
             <div id="hours"></div>
             <div id="timetables"></div>
         </section>
-        <section id="ui"></section>
+        <section id="ui">
+            <div id="term-chooser"></div>
+            <div id="course-chooser"></div>
+            <div id="settings"></div>
+        </section>
         <script src="utils/technical.utils.js"></script>
         <script src="utils/constants.utils.js"></script>
         <script src="utils/functions.utils.js"></script>
