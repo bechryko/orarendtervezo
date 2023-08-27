@@ -42,6 +42,10 @@ class Term {
             course.locationInterval.startPlace = LocationInterval.getFirstAvailablePlace(course, ...crossingCourses);
             course.locationInterval.size = 1;
         }
+        for(const course of daySorted) {
+            for(; !LocationInterval.isIntervalConflict(course, ...course.getCrossingCourses(this)); course.locationInterval.size++);
+            course.locationInterval.size--;
+        }
         return this;
     }
     #calculateSplit(course) {
