@@ -30,7 +30,9 @@ class Term {
         return this;
     }
     #splitTimetable(day) {
-        const daySorted = this.timetables[day].slice().sort((a, b) => b.time.length - a.time.length);
+        const daySorted = this.timetables[day].slice()
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => b.time.length - a.time.length);
         for(const course of daySorted) {
             course.locationInterval = null;
         }
