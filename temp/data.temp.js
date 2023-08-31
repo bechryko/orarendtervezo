@@ -21,7 +21,7 @@ sem_23_24_1.addCourse(new Course("Fuzzy ea", new CourseTime(1, 16, 0, 45), "IR-0
 sem_23_24_1.addCourse(new Course("Fuzzy gyak", new CourseTime(1, 17, 0, 45), "IR-001", "Dombi József", KRISTOF));
 sem_23_24_1.addCourse(new Course("Előadói készségfejlesztés", undefined, "", "Ata (CAS)", KRISTOF));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek ea", new CourseTime(3, 8, 0), "", "Pluhár András", KOZOS));
-sem_23_24_1.addCourse(new Course("Optimalizálási modellek", new CourseTime(3, 16, 0), "IR-216", "Dr. Gazdag-Tóth Boglárka", KOZOS));
+sem_23_24_1.addCourse(new Course("Optimalizálási modellek", new CourseTime(3, 16, 0), "IR-216", "Dr. Gazdag-Tóth Boglárka", KOZOS, { temporary: true }));
 sem_23_24_1.addCourse(new Course("Intelligens UI - ötlettől a megvalósításig", new CourseTime(1, 18, 0), "IR-224", "Győri Judit (EPAM)", KRISTOF));
 
 sem_23_24_1.addCourse(new Course("Alkalmazásfejlesztés C# alapokon", new CourseTime(0, 10, 0), "", "Ruzsinszki Gábor", TALAN));
@@ -32,8 +32,8 @@ sem_23_24_1.addCourse(new Course("Köszi gyak", new CourseTime(1, 15, 0, 45), ""
 
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(0, 12, 0, 45), "", "London András", TEMP, { disabled: true }));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(0, 13, 0, 45), "", "London András", TEMP, { disabled: true }));
-sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 10, 0, 45), "", "Homolya Viktor", TEMP));
-sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 11, 0, 45), "", "Homolya Viktor", KOZOS));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 10, 0, 45), "", "Homolya Viktor", KOZOS));
+sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 11, 0, 45), "", "Homolya Viktor", TEMP));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 14, 0, 45), "", "Homolya Viktor", TEMP));
 sem_23_24_1.addCourse(new Course("Döntési rendszerek gyak", new CourseTime(3, 15, 0, 45), "", "Homolya Viktor", TEMP, { disabled: true }));
 
@@ -43,8 +43,8 @@ sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(0, 18, 0, 45), "",
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(0, 19, 0, 45), "", "Szlúka András", TEMP));
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(2, 18, 0, 45), "", "Kocsor Dániel", TEMP));
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(2, 19, 0, 45), "", "Kocsor Dániel", TEMP));
-sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 10, 0, 45), "", "Horváth Krisztián", KOZOS));
-sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 11, 0, 45), "", "Horváth Krisztián", TEMP));
+sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 10, 0, 45), "", "Horváth Krisztián", TEMP));
+sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 11, 0, 45), "", "Horváth Krisztián", KOZOS));
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 12, 0, 45), "", "Kocsor Dániel", TEMP));
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 13, 0, 45), "", "Kocsor Dániel", TEMP));
 sem_23_24_1.addCourse(new Course("Bonya gyak", new CourseTime(3, 16, 0, 45), "", "Horváth Krisztián", TEMP));
