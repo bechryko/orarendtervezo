@@ -88,4 +88,8 @@ $("new-term-button").onclick = () => {
    UIController.createTerm($("new-term-name").value);
 };
 
+$("new-course-button").onclick = () => {
+   UIController.createCourse($("new-course-name").value);
+};
+
 chooseTermToDisplay(sem_23_24_1);

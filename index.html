@@ -1,99 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Órarendtervező dev-23-08-29-03421930</title>
-        <style>
-            body {
-                margin: 0;
-                overflow: hidden;
-                background-color: rgb(255, 212, 147);
-            }
-            #term-display {
-                grid-template-columns: 1fr 8fr;
-            }
-            h1 {
-                text-align: center;
-                font-size: 2vw;
-                margin: auto;
-            }
-            #term-display, div#timetables, div#hours, div#day-names,
-            #ui {
-                display: grid;
-                width: 100%;
-                height: 100%;
-            }
-            div#hours, div#day-names {
-                text-align: center;
-            }
-            div#hours h2 {
-                margin: 0;
-                border-top: 1px solid black;
-            }
-            div#day-names h2 {
-                border-left: 1px solid black;
-            }
-            term-day {
-                width: 100%;
-            }
-            #ui {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            #ui > div {
-                border: 1px solid black;
-                margin: 0;
-                height: 100%;
-                width: 100%;
-            }
-            #ui > div > * {
-                margin: 1vw;
-            }
-            term-list-element:nth-child(odd) {
-                background-color: rgb(255, 121, 121);
-            }
-            term-list-element:nth-child(even) {
-                background-color: rgb(253, 223, 134);
-            }
-        </style>
-    </head>
-    <body>
-        <section id="term-display">
-            <h1 id="term-name"></h1>
-            <div id="day-names"></div>
-            <div id="hours"></div>
-            <div id="timetables"></div>
-        </section>
-        <section id="ui">
-            <div id="term-chooser">
-                <div>
-                    <input type="text" id="new-term-name">
-                    <button id="new-term-button">Create new term</button>
-                </div>
-                <div id="term-list"></div>
+
+<head>
+    <meta charset="utf-8">
+    <title>Órarendtervező dev-23-08-27-a789eb5f</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: rgb(255, 212, 147);
+            height: 100vh;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/ui.style.css">
+    <link rel="stylesheet" href="styles/display.style.css">
+</head>
+
+<body>
+    <section id="term-display">
+        <h1 id="term-name"></h1>
+        <div id="day-names"></div>
+        <div id="hours"></div>
+        <div id="timetables"></div>
+    </section>
+    <section id="ui">
+        <div id="term-chooser">
+            <div>
+                <input type="text" id="new-term-name">
+                <button id="new-term-button">Create new term</button>
             </div>
-            <div id="course-chooser">
-                <div>
-                    <input type="text" id="new-course-name">
-                    <button id="new-term-button">Create new course</button>
-                </div>
-                <div id="course-list"></div>
+            <div id="term-list"></div>
+        </div>
+        <div id="course-chooser">
+            <div>
+                <input type="text" id="new-course-name">
+                <button id="new-course-button">Create new course</button>
             </div>
-            <div id="settings"></div>
-        </section>
-        <script src="utils/technical.utils.js"></script>
-        <script src="utils/constants.utils.js"></script>
-        <script src="utils/functions.utils.js"></script>
-        <script src="utils/display-texts.utils.js"></script>
-        <script src="classes/location-interval.class.js"></script>
-        <script src="classes/course-category.class.js"></script>
-        <script src="classes/course-time.class.js"></script>
-        <script src="classes/course.class.js"></script>
-        <script src="classes/term.class.js"></script>
-        <script src="components/ui/term-list-element.component.js"></script>
-        <script src="components/display/term-course.component.js"></script>
-        <script src="components/display/term-day.component.js"></script>
-        <script src="services/ui-controller.service.js"></script>
-        <script src="temp/data.temp.js"></script>
-        <script src="main.js"></script>
-    </body>
+            <div id="course-list"></div>
+        </div>
+        <div id="settings"></div>
+    </section>
+    <script src="utils/technical.utils.js"></script>
+    <script src="utils/constants.utils.js"></script>
+    <script src="utils/functions.utils.js"></script>
+    <script src="utils/display-texts.utils.js"></script>
+    <script src="classes/course-category.class.js"></script>
+    <script src="classes/course-time.class.js"></script>
+    <script src="classes/course.class.js"></script>
+    <script src="classes/location-interval.class.js"></script>
+    <script src="classes/term.class.js"></script>
+    <script src="components/ui/term-list-element.component.js"></script>
+    <script src="components/ui/course-list-element.component.js"></script>
+    <script src="components/display/term-course.component.js"></script>
+    <script src="components/display/term-day.component.js"></script>
+    <script src="services/ui-controller.service.js"></script>
+    <script src="temp/data.temp.js"></script>
+    <script src="main.js"></script>
+</body>
+
 </html>

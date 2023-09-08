@@ -1,14 +1,25 @@
 class Course {
-    constructor(name, time, place, teacher, category, config = {}) {
+    #listElement;
+
+    constructor(name, time, place, teacher, category = {}, config = {
+        primary: false,
+        temporary: false,
+        disabled: false
+    }) {
         this.name = name;
         this.time = time;
         this.place = place;
         this.teacher = teacher;
         this.color = category.color;
         this.categoryName = category.name;
-        this.primary = config.primary ?? category.config.primary;
-        this.temporary = config.temporary ?? category.config.temporary;
-        this.disabled = config.disabled ?? category.config.disabled;
+        this.primary = category.config.primary || config.primary;
+        this.temporary = category.config.temporary || config.temporary;
+        this.disabled = category.config.disabled || config.disabled;
+        this.#listElement = $("course-list").createChild("course-list-element");
+        this.#listElement.title = this.name;
+        this.#listElement.infos = this.getCourseInfos();
+        this.#listElement.onclick = () => UIController.selectCourse(this);
+        this.#listElement.style.display = "none";
     }
 
     #isTimeDuringThis(time) {
@@ -40,6 +51,12 @@ class Course {
             }
         }
         return c;
+    }
+    toggleListElementVisibility() {
+        this.#listElement.style.display = this.#listElement.style.display == "none" ? "block" : "none";
+    }
+    getCourseInfos() {
+        return `${DAY_NAMES[this.time?.day] ?? ""} ` + CourseTime.toString(this.time);
     }
 
     get width() {

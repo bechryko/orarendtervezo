@@ -1,0 +1,26 @@
+#term-display {
+   grid-template-columns: 1fr 8fr;
+}
+h1 {
+   text-align: center;
+   font-size: 2vw;
+   margin: auto;
+}
+#term-display, div#timetables, div#hours, div#day-names {
+   display: grid;
+   width: 100%;
+   height: 100%;
+}
+div#hours, div#day-names {
+   text-align: center;
+}
+div#hours h2 {
+   margin: 0;
+   border-top: 1px solid black;
+}
+div#day-names h2 {
+   border-left: 1px solid black;
+}
+term-day {
+   width: 100%;
+}

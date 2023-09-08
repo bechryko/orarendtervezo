@@ -100,13 +100,18 @@ class Term {
     }
     get courseList() {
         let list = new Set();
-        for(const day of this.timetables) {
-            for(const course of day) {
-                list.add(course.name);
-            }
-        }
+        this.allCourses.forEach(course => list.add(course.name));
         list = Array.from(list);
         list.sort();
+        return list;
+    }
+    get allCourses() {
+        const list = [];
+        for(const day of this.timetables) {
+            for(const course of day) {
+                list.push(course);
+            }
+        }
         return list;
     }
 }

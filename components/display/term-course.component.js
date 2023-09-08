@@ -179,14 +179,7 @@ class TermCourse extends HTMLElement {
 
    #getFormattedTime() {
       const courseTimeObject = JSON.parse(this.time);
-      const start = {
-         hour: courseTimeObject.hour,
-         min: courseTimeObject.min
-      };
-      const end = { ...start };
-      end.min += courseTimeObject.length;
-      for (; end.min >= 60; end.min -= 60, end.hour++);
-      return `${start.hour}:${start.min < 10 ? '0' : ''}${start.min} - ${end.hour}:${end.min < 10 ? '0' : ''}${end.min}`;
+      return CourseTime.toString(courseTimeObject);
    }
 }
 
