@@ -2,7 +2,7 @@ class UIController {
    static selectedTerm = null;
 
    static createTerm(name) {
-      if(name.trim() === '') {
+      if((name = name.trim()) === '') {
          console.error(`Term name cannot be empty`);
          return;
       }

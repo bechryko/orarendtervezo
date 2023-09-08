@@ -12,7 +12,9 @@ class Term {
         for(let i = 0; i < 7; i++) {
             this.timetables[i] = [];
         }
-        $("term-list").createChild("term-list-element").title = name;
+        const listElement = $("term-list").createChild("term-list-element")
+        listElement.title = name;
+        listElement.onclick = () => UIController.selectTerm(this);
         Term.list.push(this);
     }
 
