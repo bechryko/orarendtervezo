@@ -19,7 +19,7 @@
 
 <body>
     <section id="term-display">
-        <h1 id="term-name"></h1>
+        <h1 id="term-name" class="button"></h1>
         <div id="day-names"></div>
         <div id="hours"></div>
         <div id="timetables"></div>
@@ -27,15 +27,18 @@
     <section id="ui">
         <div id="term-chooser" class="scrollable">
             <div class="column-input">
+                <button id="back-button" class="button">Back to the timetable</button>
+            </div>
+            <div class="column-input">
                 <input type="text" id="new-term-name">
-                <button id="new-term-button">Create new term</button>
+                <button id="new-term-button" class="button">Create new term</button>
             </div>
             <div id="term-list"></div>
         </div>
         <div id="course-chooser" class="scrollable">
             <div class="column-input">
                 <input type="text" id="new-course-name">
-                <button id="new-course-button">Create new course</button>
+                <button id="new-course-button" class="button">Create new course</button>
             </div>
             <div id="course-list"></div>
         </div>

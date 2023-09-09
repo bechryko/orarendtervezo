@@ -15,6 +15,7 @@ class Term {
         const listElement = $("term-list").createChild("term-list-element")
         listElement.title = name;
         listElement.onclick = () => UIController.selectTerm(this);
+        listElement.classList.add("button");
         Term.list.push(this);
     }
 

@@ -37,3 +37,7 @@ course-list-element:nth-child(even) {
 .column-input > * {
    font-size: large;
 }
+#back-button {
+   display: block;
+   margin: auto;
+}

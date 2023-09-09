@@ -84,6 +84,11 @@ $("term-name").addEventListener("click", () => {
    $("ui").style.display = "grid";
 });
 
+$("back-button").addEventListener("click", () => {
+   $("term-display").style.display = "grid";
+   $("ui").style.display = "none";
+});
+
 $("new-term-button").onclick = () => {
    UIController.createTerm($("new-term-name").value);
 };
