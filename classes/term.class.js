@@ -62,9 +62,21 @@ class Term {
         }
         course.locationInterval.split = Math.max(course.locationInterval.split, ...childCrosses);
         for(const cross of crossing) {
-            cross.locationInterval.split = Math.max(cross.locationInterval.split, course.locationInterval.split);
+            this.#suggestSplitValue(cross, course.locationInterval.split);
         }
         return course.locationInterval.split;
+    }
+    #suggestSplitValue(course, value) {
+        if(course.locationInterval.split === value) {
+            return;
+        }
+        if(course.locationInterval.split > value) {
+            console.error(`Course '${course.name}' has a split value of ${course.locationInterval.split} but ${value} was suggested`);
+            return;
+        }
+        course.locationInterval.split = value;
+        const crossing = course.getCrossingCourses(this);
+        crossing.forEach(cross => this.#suggestSplitValue(cross, value));
     }
     updateSettings(setting, value) {
         this.#settings[setting] = !!value;
