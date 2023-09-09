@@ -1,18 +1,14 @@
 class Course {
-    constructor(name, time, place, teacher, category, config = {
-        primary: false,
-        temporary: false,
-        disabled: false
-    }) {
+    constructor(name, time, place, teacher, category, config = {}) {
         this.name = name;
         this.time = time;
         this.place = place;
         this.teacher = teacher;
         this.color = category.color;
         this.categoryName = category.name;
-        this.primary = category.config.primary || config.primary;
-        this.temporary = category.config.temporary || config.temporary;
-        this.disabled = category.config.disabled || config.disabled;
+        this.primary = config.primary ?? category.config.primary;
+        this.temporary = config.temporary ?? category.config.temporary;
+        this.disabled = config.disabled ?? category.config.disabled;
     }
 
     #isTimeDuringThis(time) {
@@ -47,6 +43,6 @@ class Course {
     }
 
     get width() {
-        return 1 / this.split;
+        return 1 / this.locationInterval.split * this.locationInterval.size;
     }
 }

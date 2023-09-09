@@ -74,10 +74,11 @@ class TermCourse extends HTMLElement {
             this.#container.style.borderWidth = "0.5vw";
             this.#container.style.borderColor = "red";
             break;
-         case 'split':
-            const split = JSON.parse(newValue);
-            this.#container.style.width = 100 / split.split + "%";
-            this.#container.style.right = 100 / split.split * split.splitPlace + "%";
+         case 'locationInterval':
+            const locationInterval = JSON.parse(newValue);
+            this.#container.style.width = 100 / locationInterval.split * locationInterval.size + "%";
+            this.#container.style.left = 100 / locationInterval.split * locationInterval.startPlace + "%";
+            break;
       }
    }
 
@@ -90,16 +91,13 @@ class TermCourse extends HTMLElement {
       this.primary = courseObject.primary;
       this.disabled = courseObject.disabled;
       this.temporary = courseObject.temporary;
-      this.split = JSON.stringify({
-         split: courseObject.split,
-         splitPlace: courseObject.splitPlace
-      });
+      this.locationInterval = JSON.stringify(courseObject.locationInterval);
    }
 
    static get observedAttributes() {
       return [
          'name', 'time', 'place', 'teacher',
-         'color', 'primary', 'disabled', 'temporary', 'split'
+         'color', 'primary', 'disabled', 'temporary', 'locationInterval'
       ];
    }
 
@@ -171,11 +169,12 @@ class TermCourse extends HTMLElement {
       }
    }
 
-   get split() {
-      return this.getAttribute('split');
+   get locationInterval() {
+      return this.getAttribute('locationInterval');
    }
-   set split(value) {
-      this.setAttribute('split', value);
+   set locationInterval(value) {
+      this.setAttribute('locationInterval', value);
+      this.attributeChangedCallback('locationInterval', null, value);
    }
 
    #getFormattedTime() {

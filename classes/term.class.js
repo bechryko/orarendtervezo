@@ -26,49 +26,57 @@ class Term {
             index++;
         }
         this.timetables[course.time.day].splice(index, 0, course);
-        this.#splitTimetables();
+        this.#splitTimetable(course.time.day);
         return this;
     }
-    #splitTimetables() {
-        for(const day of this.timetables) {
-            for(const course of day) {
-                course.split = 0;
-            }
+    #splitTimetable(day) {
+        const daySorted = this.timetables[day].slice()
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => b.time.length - a.time.length);
+        for(const course of daySorted) {
+            course.locationInterval = null;
         }
-        for(const day of this.timetables) {
-            for(const course of day) {
-                this.#calculateSplit(course);
-            }
+        for(const course of daySorted) {
+            this.#calculateSplit(course);
         }
-        for(const day of this.timetables) {
-            for(const course of day) {
-                course.splitPlace = 0;
-                const startingC = course.getCoursesWhenThisStarts(this).filter(c => c.splitPlace !== undefined);
-                outer:
-                for(let sp = 0; sp < course.split; sp++) {
-                    for(const c of startingC) {
-                        if(c.splitPlace == sp) {
-                            continue outer;
-                        }
-                    }
-                    course.splitPlace = sp;
-                    break;
-                }
-            }
+        for(const course of daySorted) {
+            const crossingCourses = course.getCrossingCourses(this);
+            course.locationInterval.startPlace = LocationInterval.getFirstAvailablePlace(course, ...crossingCourses);
+            course.locationInterval.size = 1;
+        }
+        for(const course of daySorted) {
+            for(; !LocationInterval.isIntervalConflict(course, ...course.getCrossingCourses(this)); course.locationInterval.size++);
+            course.locationInterval.size--;
         }
         return this;
     }
     #calculateSplit(course) {
-        if(course.split) {
-            return course.split;
+        if(course.locationInterval) {
+            return course.locationInterval.split;
         }
         const crossing = course.getCrossingCourses(this);
-        course.split = course.getCoursesWhenThisStarts(this).length;
+        course.locationInterval = new LocationInterval(course.getCoursesWhenThisStarts(this).length, 0, 0);
         const childCrosses = [];
         for(const cross of crossing) {
             childCrosses.push(this.#calculateSplit(cross));
         }
-        return course.split = Math.max(...childCrosses);
+        course.locationInterval.split = Math.max(course.locationInterval.split, ...childCrosses);
+        for(const cross of crossing) {
+            this.#suggestSplitValue(cross, course.locationInterval.split);
+        }
+        return course.locationInterval.split;
+    }
+    #suggestSplitValue(course, value) {
+        if(course.locationInterval.split === value) {
+            return;
+        }
+        if(course.locationInterval.split > value) {
+            console.error(`Course '${course.name}' has a split value of ${course.locationInterval.split} but ${value} was suggested`);
+            return;
+        }
+        course.locationInterval.split = value;
+        const crossing = course.getCrossingCourses(this);
+        crossing.forEach(cross => this.#suggestSplitValue(cross, value));
     }
     updateSettings(setting, value) {
         this.#settings[setting] = !!value;
