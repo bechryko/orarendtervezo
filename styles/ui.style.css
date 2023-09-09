@@ -26,6 +26,14 @@ course-list-element:nth-child(odd) {
 course-list-element:nth-child(even) {
    background-color: rgb(183, 255, 242);
 }
-#course-chooser {
-   overflow-y: scroll;
+.column-input {
+   margin: 0 !important;
+   padding: 1vw;
+   border: black 1px solid;
+   position: sticky;
+   top: 0;
+   background-color: antiquewhite;
+}
+.column-input > * {
+   font-size: large;
 }

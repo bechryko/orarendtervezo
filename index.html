@@ -12,6 +12,7 @@
             height: 100vh;
         }
     </style>
+    <link rel="stylesheet" href="styles/utility.style.css">
     <link rel="stylesheet" href="styles/ui.style.css">
     <link rel="stylesheet" href="styles/display.style.css">
 </head>
@@ -24,15 +25,15 @@
         <div id="timetables"></div>
     </section>
     <section id="ui">
-        <div id="term-chooser">
-            <div>
+        <div id="term-chooser" class="scrollable">
+            <div class="column-input">
                 <input type="text" id="new-term-name">
                 <button id="new-term-button">Create new term</button>
             </div>
             <div id="term-list"></div>
         </div>
-        <div id="course-chooser">
-            <div>
+        <div id="course-chooser" class="scrollable">
+            <div class="column-input">
                 <input type="text" id="new-course-name">
                 <button id="new-course-button">Create new course</button>
             </div>
