@@ -1,5 +1,6 @@
 class Course {
     #listElement;
+    #timetableElement;
 
     constructor(name, time, place, teacher, category = {}, config = {
         primary: false,
@@ -58,6 +59,15 @@ class Course {
     }
     getCourseInfos() {
         return `${DAY_NAMES[this.time?.day] ?? ""} ` + CourseTime.toString(this.time);
+    }
+    connectTimetableElement(element) {
+        this.#timetableElement = element;
+        element.syncWithCourseObject(this);
+    }
+    update() {
+        this.#listElement.title = this.name;
+        this.#listElement.infos = this.getCourseInfos();
+        this.#timetableElement.syncWithCourseObject(this);
     }
 
     get width() {

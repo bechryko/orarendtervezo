@@ -42,7 +42,31 @@
             </div>
             <div id="course-list"></div>
         </div>
-        <div id="settings"></div>
+        <div id="settings">
+            <div>
+                <h1>Course settings</h1>
+                <div>
+                    <label for="course-name-input">Name:</label><input type="text" id="course-name-input">
+                </div>
+                <div>
+                    <label for="course-time-day-input">Time:</label>
+                    <select id="course-time-day-input"></select>
+                    <select id="course-time-hour-input"></select>
+                    <input type="number" id="course-time-min-input">
+                    <input type="number" id="course-time-length-input">
+                </div>
+                <div>
+                    <label for="course-teacher-input">Teacher:</label><input type="text" id="course-teacher-input">
+                </div>
+                <div>
+                    <label for="course-place-input">Place:</label><input type="text" id="course-place-input">
+                </div>
+                <button id="save-course-changes">Save</button>
+            </div>
+            <div>
+                <h1>Term settings</h1>
+            </div>
+        </div>
     </section>
     <script src="utils/technical.utils.js"></script>
     <script src="utils/constants.utils.js"></script>

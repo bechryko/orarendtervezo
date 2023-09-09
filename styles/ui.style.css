@@ -41,3 +41,10 @@ course-list-element:nth-child(even) {
    display: block;
    margin: auto;
 }
+#settings {
+   display: grid;
+   grid-template-rows: 1fr 1fr;
+}
+#settings > * {
+   margin: 0 !important;
+}

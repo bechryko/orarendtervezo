@@ -97,4 +97,20 @@ $("new-course-button").onclick = () => {
    UIController.createCourse($("new-course-name").value);
 };
 
+DAY_NAMES.forEach((dayName, i) => {
+   const selectElement = $("course-time-day-input").createChild("option");
+   selectElement.value = i;
+   selectElement.innerText = dayName;
+});
+
+for(let i = STARTING_HOUR; i < END_HOUR; i++) {
+   const selectElement = $("course-time-hour-input").createChild("option");
+   selectElement.value = i;
+   selectElement.innerText = i;
+}
+
+$("save-course-changes").onclick = () => {
+   UIController.saveCourseChanges();
+};
+
 chooseTermToDisplay(sem_23_24_1);

@@ -28,7 +28,7 @@ class TermDay extends HTMLElement {
             courseObject: course,
             courseElement: document.createElement("term-course")
          };
-         retVal.courseElement.syncWithCourseObject(course);
+         retVal.courseObject.connectTimetableElement(retVal.courseElement);
          this.#container.append(retVal.courseElement);
          return retVal;
       }));
