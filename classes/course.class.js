@@ -2,7 +2,7 @@ class Course {
     #listElement;
     #timetableElement;
 
-    constructor(name, time, place, teacher, category = {}, config = {
+    constructor(name, time, place, teacher, category = { config: {} }, config = {
         primary: false,
         temporary: false,
         disabled: false
