@@ -1,4 +1,6 @@
 class CourseListElement extends HTMLElement {
+   static STYLE_BORDER_RADIUS = '2vh';
+
    #title;
    #infos;
 
@@ -11,7 +13,7 @@ class CourseListElement extends HTMLElement {
       this.shadowRoot.createChild('style').innerText = `
          div {
             border: 1px solid black;
-            border-radius: 2vh;
+            border-radius: ${CourseListElement.STYLE_BORDER_RADIUS};
             text-align: center;
             user-select: none;
             background-color: inherit;

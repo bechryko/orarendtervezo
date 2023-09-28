@@ -21,6 +21,7 @@ class Course {
         this.#listElement.infos = this.getCourseInfos();
         this.#listElement.onclick = () => UIController.selectCourse(this);
         this.#listElement.style.display = "none";
+        this.#listElement.style.borderRadius = CourseListElement.STYLE_BORDER_RADIUS;
         this.#listElement.classList.add("button");
     }
 
