@@ -2,7 +2,7 @@ class Term {
     static list = [];
 
     timetables = [];
-    #settings = {
+    _settings = {
         showAllWeekdays: false,
         showWeekend: false,
     };
@@ -86,12 +86,12 @@ class Term {
         crossing.forEach(cross => this.#suggestSplitValue(cross, value));
     }
     updateSettings(setting, value) {
-        this.#settings[setting] = !!value;
+        this._settings[setting] = !!value;
         return this;
     }
 
     get days() {
-        const minDays = this.#settings.showAllWeekdays ? 5 : this.#settings.showWeekend ? 7 : 1;
+        const minDays = this._settings.showAllWeekdays ? 5 : this._settings.showWeekend ? 7 : 1;
         for(let i = this.timetables.length - 1; i >= 0; i--) {
             if(this.timetables[i].length) {
                 return Math.max(minDays, i + 1);
@@ -114,5 +114,65 @@ class Term {
             }
         }
         return list;
+    }
+
+    stringify() {
+        return JSON.stringify({name: this.name, courses: this.allCourses});
+    }
+    static createFromJSON(json) {
+        if(!Term.checkTermJSONStructure(json)) {
+            throw new Error("Invalid JSON structure");
+        }
+        const pojo = JSON.parse(json);
+        const term = new Term(pojo.name);
+        for(const course of pojo.courses) {
+            term.addCourse(new Course(
+                course.name, 
+                new CourseTime(course.time.day, course.time.hour, course.time.min, course.time.length), 
+                course.place, 
+                course.teacher, 
+                {name: "", color: course.color, config: {}}, 
+                {primary: course.primary, temporary: course.temporary, disabled: course.disabled}
+            ));
+        }
+        return term;
+    }
+    static checkTermJSONStructure(termJSON) {
+        const termObject = JSON.parse(termJSON);
+        if(!termObject) {
+            console.error("not object")
+            return false;
+        }
+        if(!this.#checkObjectStructure(termObject, {name: "string", courses: "object"})) {
+            console.error("bad term structure")
+            return false;
+        }
+        if(!Array.isArray(termObject.courses)) {
+            console.error("bad courses structure")
+            return false;
+        }
+        for(const course of termObject.courses) {
+            if(!this.#checkObjectStructure(course, {name: "string", time: "object", place: "string", teacher: "string", color: "string", primary: "boolean", temporary: "boolean", disabled: "boolean"})) {
+                console.error("bad course structure", course)
+                return false;
+            }
+            if(!this.#checkObjectStructure(course.time, {day: "number", hour: "number", min: "number", length: "number"})) {
+                console.error("bad time structure", course)
+                return false;
+            }
+            // if(!this.#checkObjectStructure(course.config, {primary: "boolean", temporary: "boolean", disabled: "boolean"})) {
+            //     console.error("bad config structure", course)
+            //     return false;
+            // }
+        }
+        return true;
+    }
+    static #checkObjectStructure(object, structure) {
+        for(const key in structure) {
+            if(typeof object[key] !== structure[key] || (structure[key] == "number" && isNaN(object[key]))) {
+                return false;
+            }
+        }
+        return true;
     }
 }

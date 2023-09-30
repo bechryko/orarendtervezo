@@ -18,3 +18,8 @@ const removeChildren = (element) => {
       element.removeChild(element.firstChild);
    }
 }
+
+const defaultNumberValue = (value, defaultValue) => {
+   value = +value;
+   return isNaN(value) ? defaultValue : value;
+}

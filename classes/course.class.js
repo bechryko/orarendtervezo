@@ -2,7 +2,7 @@ class Course {
     #listElement;
     #timetableElement;
 
-    constructor(name, time, place, teacher, category = { config: {} }, config = {
+    constructor(name, time, place, teacher, category = { config: {}, color: "white" }, config = {
         primary: false,
         temporary: false,
         disabled: false
@@ -13,9 +13,9 @@ class Course {
         this.teacher = teacher;
         this.color = category.color;
         this.categoryName = category.name;
-        this.primary = category.config.primary || config.primary;
-        this.temporary = category.config.temporary || config.temporary;
-        this.disabled = category.config.disabled || config.disabled;
+        this.primary = (category.config.primary || config.primary) ?? false;
+        this.temporary = (category.config.temporary || config.temporary) ?? false;
+        this.disabled = (category.config.disabled || config.disabled) ?? false;
         this.#listElement = $("course-list").createChild("course-list-element");
         this.#listElement.title = this.name;
         this.#listElement.infos = this.getCourseInfos();

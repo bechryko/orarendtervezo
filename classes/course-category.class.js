@@ -1,5 +1,5 @@
 class CourseCategory {
-   constructor(name, color, config = {
+   constructor(name, color = "white", config = {
       primary: false,
       temporary: false,
       disabled: false

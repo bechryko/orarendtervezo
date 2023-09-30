@@ -1,8 +1,8 @@
 class CourseTime {
-   constructor(day, hour, min, length = 90) {
-      this.day = day % 7;
-      this.hour = Math.max(STARTING_HOUR, Math.min(END_HOUR, +hour));
-      this.min = +min;
+   constructor(day, hour, min, length) {
+      this.day = defaultNumberValue(day % 7, 0);
+      this.hour = defaultNumberValue(Math.max(STARTING_HOUR, Math.min(END_HOUR, hour)), STARTING_HOUR);
+      this.min = defaultNumberValue(min, 0);
       while(this.min >= 60) {
          this.min -= 60;
          this.hour++;
@@ -11,7 +11,7 @@ class CourseTime {
          this.min += 60;
          this.hour--;
       }
-      this.length = +length;
+      this.length = defaultNumberValue(length, 90);
    }
 
    toMin() {
