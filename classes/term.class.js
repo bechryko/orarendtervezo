@@ -7,8 +7,9 @@ class Term {
         showWeekend: false,
     };
 
-    constructor(name) {
+    constructor(name, color = "white") {
         this.name = name;
+        this.color = color;
         for(let i = 0; i < 7; i++) {
             this.timetables[i] = [];
         }

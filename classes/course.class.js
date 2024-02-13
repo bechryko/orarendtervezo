@@ -2,7 +2,7 @@ class Course {
     #listElement;
     #timetableElement;
 
-    constructor(name, time, place, teacher, category = { config: {}, color: "white" }, config = {
+    constructor(name, time, place = "", teacher = "", category = { config: {}, color: "white" }, config = {
         primary: false,
         temporary: false,
         disabled: false
@@ -68,7 +68,7 @@ class Course {
     update() {
         this.#listElement.title = this.name;
         this.#listElement.infos = this.getCourseInfos();
-        this.#timetableElement.syncWithCourseObject(this);
+        this.#timetableElement.syncWithCourseObject(this); // TODO: update the whole timetable (split)
     }
 
     get width() {

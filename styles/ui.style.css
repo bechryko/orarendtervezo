@@ -4,6 +4,7 @@
    height: 100%;
    grid-template-columns: repeat(3, 1fr);
    display: none;
+   background-color: #ffd493;
 }
 #ui > div {
    border: 1px solid black;

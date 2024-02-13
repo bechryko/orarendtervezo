@@ -25,8 +25,10 @@ class UIController {
          console.error(`No term selected`);
          return;
       }
-      const course = new Course(name);
+      const defaultTime = new CourseTime(0, 8, 0);
+      const course = new Course(name, defaultTime);
       this.selectedTerm.addCourse(course);
+      course.toggleListElementVisibility();
       return course;
    }
 
@@ -36,21 +38,28 @@ class UIController {
       }
       if(this.selectedTerm) {
          this.selectedTerm.allCourses.forEach(course => course.toggleListElementVisibility());
-         this.selectedCourse = null;
       }
       this.selectedTerm = term;
       this.selectedTerm.allCourses.forEach(course => course.toggleListElementVisibility());
+      this.selectCourse(null);
+      this.chooseTermToDisplay(term);
    }
 
    static selectCourse(course) {
-      this.selectedCourse = course;
-      $("course-name-input").value = course.name ?? "";
-      $("course-time-day-input").value = course.time?.day ?? 0;
-      $("course-time-hour-input").value = course.time?.hour ?? STARTING_HOUR;
-      $("course-time-min-input").value = course.time?.min ?? 0;
-      $("course-time-length-input").value = course.time?.length ?? 90;
-      $("course-teacher-input").value = course.teacher;
-      $("course-place-input").value = course.place;
+      if(course && course !== this.selectedCourse) {
+         $("course-settings").style.visibility = "visible";
+         $("course-name-input").value = course.name ?? "";
+         $("course-time-day-input").value = course.time?.day ?? 0;
+         $("course-time-hour-input").value = course.time?.hour ?? STARTING_HOUR;
+         $("course-time-min-input").value = course.time?.min ?? 0;
+         $("course-time-length-input").value = course.time?.length ?? 90;
+         $("course-teacher-input").value = course.teacher;
+         $("course-place-input").value = course.place;
+         this.selectedCourse = course;
+      } else {
+         $("course-settings").style.visibility = "hidden";
+         this.selectedCourse = null;
+      }
    }
 
    static saveCourseChanges() {

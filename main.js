@@ -11,8 +11,9 @@ function chooseTermToDisplay(term) {
 }
 
 const setup = {
-   termTitle(term) {
+   termBasics(term) {
       $("term-name").innerText = term.name;
+      $("term-display").style.backgroundColor = term.color;
    },
    dayNames(term) {
       const dayNamesContainer = $("day-names");
@@ -113,4 +114,7 @@ $("save-course-changes").onclick = () => {
    UIController.saveCourseChanges();
 };
 
-chooseTermToDisplay(sem_23_24_1);
+UIController.chooseTermToDisplay = chooseTermToDisplay;
+if(Term.list.length) {
+   UIController.chooseTermToDisplay(Term.list[0]);
+}
